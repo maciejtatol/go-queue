@@ -33,7 +33,7 @@ make clean # remove local build artifacts
 
 ## Task producer and consumer
 
-The server manually creates a buffered Go channel with capacity for 100 pending
+The server manually creates buffered Go channel with capacity for 100 pending
  tasks and starts one background consumer. `POST /tasks` creates a task and the
 producer publishes it with the fixed topic `tasks.created`. The consumer processes
 it by logging its ID, topic, and name.
@@ -49,6 +49,6 @@ and `created_at`. Acceptance means the task was queued; processing happens
 asynchronously. Invalid requests return `400`; a full queue returns `503`.
 
 This is a local SQS-inspired learning example; no AWS account or dependencies are
-needed. The topic is a message label, not a separate pub/sub broker. Tasks are
+needed. The topic is message label, not a separate pub/sub broker. Tasks are
 stored only in memory, with no persistence or retries. Ctrl+C stops accepting
 requests and drains queued tasks before exiting; an abrupt exit loses pending work.
